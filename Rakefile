@@ -9,7 +9,8 @@ begin
     gem.email = "badcarl@gmail.com"
     gem.homepage = "http://github.com/badcarl/integrity-jabber"
     gem.authors = ["Carl Porth"]
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+    gem.add_dependency 'integrity'
+    gem.add_dependency 'xmpp4r'
   end
 
 rescue LoadError
