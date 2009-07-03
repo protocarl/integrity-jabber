@@ -1,0 +1,10 @@
+receiver:
+  jid: client1@localhost/receiver
+  password: client1
+  server: localhost
+  port: 5222
+notifier:
+  jid: client2@localhost/notifier
+  password: client2
+  server: localhost
+  port: 5222
