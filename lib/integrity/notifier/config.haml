@@ -1,0 +1,21 @@
+%h3 Jabber Server Configuration
+
+%p.normal
+  %label{ :for => "jabber_notifier_jid" } Jabber ID
+  %input.text#jabber_notifier_jid{ :name => "notifiers[Jabber][jid]", :value => config["jid"], :type => "text" }
+
+%p.normal
+  %label{ :for => "jabber_notifier_password" } Password
+  %input.text#jabber_notifier_password{ :name => "notifiers[Jabber][password]", :value => config["password"], :type => "text" }
+
+%p.normal
+  %label{ :for => "jabber_notifier_to" } To
+  %input.text#jabber_notifier_to{ :name => "notifiers[Jabber][to]", :value => config["to"], :type => "text" }
+
+%p.normal
+  %label{ :for => "jabber_notifier_server" } Server
+  %input.text#jabber_notifier_server{ :name => "notifiers[Jabber][server]", :value => config["server"], :type => "text" }
+
+%p.normal
+  %label{ :for => "jabber_notifier_port" } Port
+  %input.text#jabber_notifier_port{ :name => "notifiers[Jabber][port]", :value => config["port"], :type => "text" }
