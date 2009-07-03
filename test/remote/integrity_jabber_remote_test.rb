@@ -1,8 +1,4 @@
-require "test/unit"
-require "xmpp4r"
-require "integrity/notifier/test"
-
-require File.dirname(__FILE__) + "/../lib/integrity/notifier/jabber"
+require File.dirname(__FILE__) + '/../test_helper'
 
 class IntegrityJabberRemoteTest < Test::Unit::TestCase
   include Integrity::Notifier::Test

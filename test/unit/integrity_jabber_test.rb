@@ -1,9 +1,4 @@
-require "test/unit"
-require "xmpp4r"
-require "mocha"
-require "integrity/notifier/test"
-
-require File.dirname(__FILE__) + "/../lib/integrity/notifier/jabber"
+require File.dirname(__FILE__) + '/../test_helper'
 
 class IntegrityJabberTest < Test::Unit::TestCase
   include Integrity::Notifier::Test
@@ -30,11 +25,11 @@ class IntegrityJabberTest < Test::Unit::TestCase
   def test_configuration_form
     assert form_have_tag?("h3", :content => "Jabber Server Configuration")
 
-    assert provides_option?("jid", "foo@example.org")
-    assert provides_option?("password",  "secret")
-    assert provides_option? "server",    "example.org"
-    assert provides_option? "port",      "5222"
-    assert provides_option?("to",        "bar@example.org")
+    assert provides_option?("jid",      "foo@example.org")
+    assert provides_option?("password", "secret")
+    assert provides_option?("server",   "example.org")
+    assert provides_option?("port",     "5222")
+    assert provides_option?("to",       "bar@example.org")
   end
 
   def test_configuration_with_server
