@@ -9,20 +9,17 @@ module Integrity
         File.read(File.dirname(__FILE__) + "/config.haml")
       end
 
-      def initialize(commit, config={})
+      def initialize(commit, config)
+        config.delete_if { |k,v| v.blank? }
+
+        @client       = ::Jabber::Client.new(config.delete('jid'))
+        @password     = config.delete('password')
+        @to           = config.delete('to').split(/\s+/)
+        @server       = config.delete('server')
+        @port         = config.delete('port') || '5222'
+        @stanza_limit = config.delete('stanza_limit') || '65536'
+
         super(commit, config)
-
-        @client   = ::Jabber::Client.new(config.delete('jid'))
-        @password = config.delete('password')
-        @port     = config.delete('port')
-        @server   = config.delete('server')
-        @to       = config.delete('to').split(/\s+/)
-
-        @server = nil  if @server.blank?
-        @port   = 5222 if @port.blank?
-
-        @stanza_limit = config.delete('stanza_limit').to_i
-        @stanza_limit = 65536 if @stanza_limit.zero?
       end
 
       def deliver!
