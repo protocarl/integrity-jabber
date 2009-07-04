@@ -30,6 +30,7 @@ class IntegrityJabberTest < Test::Unit::TestCase
     assert provides_option?("server",   "example.org")
     assert provides_option?("port",     "5222")
     assert provides_option?("to",       "bar@example.org")
+    assert provides_option?("stanza_limit", "65536")
   end
 
   def test_configuration_with_server
@@ -74,6 +75,13 @@ class IntegrityJabberTest < Test::Unit::TestCase
     @client.expects(:close)
 
     Integrity::Notifier::Jabber.new(@commit, @config).deliver!
+  end
+
+  def test_truncates_long_build
+    @commit.build.output = 'x' * 65537
+    @client.expects(:send).with { |message| message.body.length == 65536 }
+
+    Integrity::Notifier::Jabber.new(@commit, @config.merge('stanza_limit' => '65536')).deliver!
   end
 
 end

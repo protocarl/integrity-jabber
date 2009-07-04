@@ -19,3 +19,7 @@
 %p.normal
   %label{ :for => "jabber_notifier_port" } Port
   %input.text#jabber_notifier_port{ :name => "notifiers[Jabber][port]", :value => config["port"], :type => "text" }
+
+%p.normal
+  %label{ :for => "jabber_notifier_stanza_limit" } Stanza Limit
+  %input.text#jabber_notifier_stanza_limit{ :name => "notifiers[Jabber][stanza_limit]", :value => config["stanza_limit"], :type => "text" }

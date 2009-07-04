@@ -20,14 +20,19 @@ module Integrity
 
         @server = nil  if @server.blank?
         @port   = 5222 if @port.blank?
+
+        @stanza_limit = config.delete('stanza_limit').to_i
+        @stanza_limit = 65536 if @stanza_limit.zero?
       end
 
       def deliver!
         @client.connect(@server, @port.to_i)
         @client.auth(@password)
 
+        body = full_message[0...@stanza_limit.to_i]
+
         @to.each do |to|
-          message = ::Jabber::Message.new(to, full_message)
+          message = ::Jabber::Message.new(to, body)
           message.type = :chat
           @client.send(message)
         end
