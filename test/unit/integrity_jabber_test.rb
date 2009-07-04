@@ -77,11 +77,18 @@ class IntegrityJabberTest < Test::Unit::TestCase
     Integrity::Notifier::Jabber.new(@commit, @config).deliver!
   end
 
-  def test_truncates_long_build
+  def test_configuration_with_stanza_limit
+    @commit.build.output = 'x' * 101
+    @client.expects(:send).with { |message| message.body.length == 100 }
+
+    Integrity::Notifier::Jabber.new(@commit, @config.merge('stanza_limit' => '100')).deliver!
+  end
+
+  def test_configuration_without_stanza_limit
     @commit.build.output = 'x' * 65537
     @client.expects(:send).with { |message| message.body.length == 65536 }
 
-    Integrity::Notifier::Jabber.new(@commit, @config.merge('stanza_limit' => '65536')).deliver!
+    Integrity::Notifier::Jabber.new(@commit, @config.merge('stanza_limit' => '')).deliver!
   end
 
 end
