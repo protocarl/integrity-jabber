@@ -1,6 +1,12 @@
 = integrity-jabber
 
-Description goes here.
+Install from github
+
+  sudo gem install -s http://gems.github.com badcarl-integrity-jabber
+
+Then require in your config file, config.ru if using passenger
+
+  require 'integrity/notifier/jabber'
 
 == Copyright
 
